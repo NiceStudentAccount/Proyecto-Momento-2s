@@ -9,14 +9,19 @@ package Data;
  * @author samyg
  */
 public abstract class Card {
-    String character;
-    String situation;
+    protected Character character;
+    protected String situation;
 
-    public String getCharacter() {
+    public Card(Character character, String situation) {
+        this.character = character;
+        this.situation = situation;
+    }
+
+    public Character getCharacter() {
         return character;
     }
 
-    public void setCharacter(String character) {
+    public void setCharacter(Character character) {
         this.character = character;
     }
 

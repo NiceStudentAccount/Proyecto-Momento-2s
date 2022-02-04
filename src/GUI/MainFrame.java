@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import Logic.MainClass;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -22,16 +23,6 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         
         
-    }
-    
-    public void showPanel(JPanel panel) {
-        panel.setSize(520, 650);
-        panel.setLocation(0, 0);
-        
-        background.removeAll();
-        background.add(panel, BorderLayout.CENTER);
-        background.revalidate();
-        background.repaint();
     }
 
     /**
@@ -167,7 +158,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
         DisplayGuide dis = new DisplayGuide();
-        showPanel(dis);
+        MainClass.repaintMenu(dis, background);
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked

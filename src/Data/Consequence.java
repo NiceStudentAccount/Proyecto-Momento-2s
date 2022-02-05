@@ -5,6 +5,7 @@
 package Data;
 
 import java.util.HashMap;
+import javax.swing.JProgressBar;
 
 /**
  *
@@ -23,6 +24,12 @@ public class Consequence {
 
     public void setStatsAlteration(HashMap<Stat, Integer> statsAlteration) {
         this.statsAlteration = statsAlteration;
+    }
+    
+    public void affectStats() {
+        statsAlteration.forEach((k, v) -> {
+            k.setValue(k.getValue() + v);
+        });
     }
     
 }

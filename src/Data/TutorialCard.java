@@ -11,7 +11,7 @@ package Data;
 public class TutorialCard extends Card {
     private String aspectToTeach;
 
-    public TutorialCard(Character character, String description, String aspectToTeach) {
+    public TutorialCard(GameCharacter character, String description, String aspectToTeach) {
         super(character, description);
         this.aspectToTeach = aspectToTeach;
     }

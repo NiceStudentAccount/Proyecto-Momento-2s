@@ -12,13 +12,13 @@ import javax.swing.Icon;
  */
 public class Player {
     private String name;
-    private String bussinessName;
+    private String businessName;
     private String position;
     private Icon playerIcon;
 
-    public Player(String name, String bussinessName, String position, Icon playerIcon) {
+    public Player(String name, String businessName, String position, Icon playerIcon) {
         this.name = name;
-        this.bussinessName = bussinessName;
+        this.businessName = businessName;
         this.position = position;
         this.playerIcon = playerIcon;
     }
@@ -32,11 +32,11 @@ public class Player {
     }
 
     public String getBussinessName() {
-        return bussinessName;
+        return businessName;
     }
 
     public void setBussinessName(String bussinessName) {
-        this.bussinessName = bussinessName;
+        this.businessName = bussinessName;
     }
 
     public String getPosition() {

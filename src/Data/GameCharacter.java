@@ -10,12 +10,12 @@ import javax.swing.Icon;
  *
  * @author samyg
  */
-public class Character {
+public class GameCharacter {
     private Icon characterIcon;
     private String name;
     private String prefix;
 
-    public Character(Icon characterIcon, String name, String prefix) {
+    public GameCharacter(Icon characterIcon, String name, String prefix) {
         this.characterIcon = characterIcon;
         this.name = name;
         this.prefix = prefix;

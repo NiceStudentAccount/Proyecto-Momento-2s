@@ -4,8 +4,11 @@
  */
 package GUI;
 
+import Data.DecisionCard;
+import Logic.ElementsInstantiation;
 import Logic.MainClass;
 import java.awt.BorderLayout;
+import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -15,6 +18,7 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author samyg
  */
 public class MainFrame extends javax.swing.JFrame {
+    private ChoiceCard choiceCardMenu;
 
     /**
      * Creates new form MainFrame
@@ -22,7 +26,23 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         
+        this.choiceCardMenu = new ChoiceCard();
+    }
+    
+    public void setCard(DecisionCard card) {
+        choiceCardMenu.setChoice(card);
+        choiceCardMenu.paintCard();
+    }
+    
+    
+    
+    public void setStats() {
+        choiceCardMenu.setStatusStat(ElementsInstantiation.getStatusStat());
+        choiceCardMenu.setMoneyStat(ElementsInstantiation.getMoneyStat());
+        choiceCardMenu.setHappinessStat(ElementsInstantiation.getHappinessStat());
+        choiceCardMenu.setEnvironmentStat(ElementsInstantiation.getEnvironmentStat());
         
+        choiceCardMenu.paintInitialStats();
     }
 
     /**
@@ -157,8 +177,10 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-        DisplayGuide dis = new DisplayGuide();
-        MainClass.repaintMenu(dis, background);
+        MainClass.repaintMenu(choiceCardMenu, background);
+        DecisionCard thisCard = MainClass.getCardList().get(0);
+        setCard(thisCard);
+        setStats();
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked

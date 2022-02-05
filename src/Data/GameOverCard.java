@@ -14,7 +14,7 @@ import javax.swing.Icon;
 public class GameOverCard extends Card {
     private GameOverScreen screen;
 
-    public GameOverCard(Character character, String situation, GameOverScreen screen, String gameOverDescription, Icon gameOverIcon) {
+    public GameOverCard(GameCharacter character, String situation, GameOverScreen screen, String gameOverDescription, Icon gameOverIcon) {
         super(character, situation);
         this.screen = new GameOverScreen(gameOverDescription, gameOverIcon);
     }

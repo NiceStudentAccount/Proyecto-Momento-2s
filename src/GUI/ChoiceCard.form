@@ -48,7 +48,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="0" width="520" height="180"/>
+              <AbsoluteConstraints x="0" y="0" width="550" height="180"/>
             </Constraint>
           </Constraints>
 
@@ -68,7 +68,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <Component id="username" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="111" max="32767" attributes="0"/>
+                                      <EmptySpace min="0" pref="141" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="jScrollPane1" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -266,7 +266,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="40" y="200" width="440" height="390"/>
+              <AbsoluteConstraints x="50" y="200" width="440" height="390"/>
             </Constraint>
           </Constraints>
 
@@ -430,6 +430,8 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="goRightPanelMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="goRightPanelMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="goRightPanelMouseExited"/>
               </Events>
 
               <Layout>

@@ -20,10 +20,10 @@ import javax.swing.ImageIcon;
  * @author samyg
  */
 public class ElementsInstantiation {
-    private static Stat statusStat = new Stat(60, staticIcon("reputacionIcon.png"));
-    private static Stat moneyStat = new Stat(60, staticIcon("dineroIcon.png"));
-    private static Stat happinessStat = new Stat(60, staticIcon("felicidadIcon.png"));
-    private static Stat environmentStat = new Stat(60, staticIcon("arbolIcon.png"));
+    private static Stat statusStat = new Stat(60);
+    private static Stat moneyStat = new Stat(60);
+    private static Stat happinessStat = new Stat(60);
+    private static Stat environmentStat = new Stat(60);
 
     public static Stat getStatusStat() {
         return statusStat;

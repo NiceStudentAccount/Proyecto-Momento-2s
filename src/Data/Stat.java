@@ -12,11 +12,8 @@ import javax.swing.Icon;
  */
 public class Stat {
     private int value;
-    private Icon statIcon;
-
-    public Stat(int value, Icon statIcon) {
+    public Stat(int value) {
         this.value = value;
-        this.statIcon = statIcon;
     }
 
     public int getValue() {
@@ -25,14 +22,6 @@ public class Stat {
 
     public void setValue(int value) {
         this.value = value;
-    }
-
-    public Icon getStatIcon() {
-        return statIcon;
-    }
-
-    public void setStatIcon(Icon statIcon) {
-        this.statIcon = statIcon;
     }
     
 }

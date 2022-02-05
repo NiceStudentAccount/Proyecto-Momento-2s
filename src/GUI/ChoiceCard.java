@@ -8,9 +8,12 @@ import Data.DecisionCard;
 import Data.Stat;
 import Logic.GameState;
 import Logic.MainClass;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import javax.swing.Timer;
 
 /**
  *
@@ -31,6 +34,7 @@ public class ChoiceCard extends javax.swing.JPanel {
         initComponents();
         
         this.gameState = new GameState();
+        
     }
 
     public DecisionCard getChoice() {
@@ -39,12 +43,6 @@ public class ChoiceCard extends javax.swing.JPanel {
 
     public void setChoice(DecisionCard choice) {
         this.choice = choice;
-    }
-    
-    public void paintCard() {
-        situationDescription.setText(choice.getSituation());
-        characterIconLabel.setIcon(choice.getCharacter().getCharacterIcon());
-        characterNameLabel.setText(choice.getCharacter().getName());
     }
     
     public void setCard(DecisionCard card) {
@@ -84,6 +82,12 @@ public class ChoiceCard extends javax.swing.JPanel {
         this.environmentStat = environmentStat;
     }
     
+    public void paintCard() {
+        situationDescription.setText(choice.getSituation());
+        characterIconLabel.setIcon(choice.getCharacter().getCharacterIcon());
+        characterNameLabel.setText(choice.getCharacter().getName());
+    }
+    
     public void paintInitialStats() {
         statusBar.setValue(statusStat.getValue());
         moneyBar.setValue(moneyStat.getValue());
@@ -91,56 +95,23 @@ public class ChoiceCard extends javax.swing.JPanel {
         environmentBar.setValue(environmentStat.getValue());
     }
     
-    public void affectBar(Stat statistic, JProgressBar statBar) {
-        if (statistic.getValue() < statBar.getValue()) {
-            int originalBarValue = statBar.getValue();
-            while (statistic.getValue() < statBar.getValue()) {
-                statBar.setValue(originalBarValue);
-                
-                try {
-                    Thread.currentThread();
-                    Thread.sleep(5);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                
-                originalBarValue-=1;
-            }
-        } else {
-            int originalBarValue = statBar.getValue();
-            while (statistic.getValue() > statBar.getValue()) {
-                statBar.setValue(originalBarValue);
-                
-                try {
-                    Thread.currentThread();
-                    Thread.sleep(5);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                
-                originalBarValue+=1;
-            }
-        }
-        
-    }
-    
     public void consequenceOnBars() {
         if (statusStat.getValue() != statusBar.getValue()) {
-            affectBar(statusStat, statusBar);
+            animateBar(statusStat, statusBar);
         }
         if (moneyStat.getValue() != moneyBar.getValue()) {
-            affectBar(moneyStat, moneyBar);
+            animateBar(moneyStat, moneyBar);
         }
         if (happinessStat.getValue() != happinessBar.getValue()) {
-            affectBar(happinessStat, happinessBar);
+            animateBar(happinessStat, happinessBar);
         }
         if (environmentStat.getValue() != environmentBar.getValue()) {
-            affectBar(environmentStat, environmentBar);
+            animateBar(environmentStat, environmentBar);
         }
     }
     
     public void checkIfLoose() {
-        if (statusBar.getValue() == 0 || statusBar.getValue() == 120 || moneyBar.getValue() == 0 || moneyBar.getValue() == 120 || happinessBar.getValue() == 0 || happinessBar.getValue() == 120 || environmentBar.getValue() == 0 || environmentBar.getValue() == 120) {
+        if (statusStat.getValue() == 0 || statusStat.getValue() == 120 || moneyStat.getValue() == 0 || moneyStat.getValue() == 120 || happinessStat.getValue() == 0 || happinessStat.getValue() == 120 || environmentStat.getValue() == 0 || environmentStat.getValue() == 120) {
             JOptionPane.showMessageDialog(cardPanel, "Perdiste por gei");
             System.exit(0);
         }
@@ -151,7 +122,25 @@ public class ChoiceCard extends javax.swing.JPanel {
         DecisionCard newCard = choices.get(0);
         setCard(newCard);
     }
-
+    
+    private void animateBar(Stat stat, JProgressBar bar) {
+        ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int counter = bar.getValue();
+                if (stat.getValue() < bar.getValue()) {
+                    bar.setValue(counter-1);
+                }
+                else if (stat.getValue() > bar.getValue()) {
+                    bar.setValue(counter+1);
+                } else {
+                    return;
+                }
+            }
+        };
+        Timer timer = new Timer(25, actionListener);
+        timer.start();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -249,7 +238,7 @@ public class ChoiceCard extends javax.swing.JPanel {
                         .addGroup(statsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(statsPanelLayout.createSequentialGroup()
                                 .addComponent(username)
-                                .addGap(0, 111, Short.MAX_VALUE))
+                                .addGap(0, 141, Short.MAX_VALUE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(statsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,7 +288,7 @@ public class ChoiceCard extends javax.swing.JPanel {
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        background.add(statsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 180));
+        background.add(statsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 180));
 
         cardPanel.setBackground(new java.awt.Color(255, 255, 51));
 
@@ -355,6 +344,12 @@ public class ChoiceCard extends javax.swing.JPanel {
         goRightPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 goRightPanelMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                goRightPanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                goRightPanelMouseExited(evt);
             }
         });
 
@@ -417,7 +412,7 @@ public class ChoiceCard extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        background.add(cardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 440, 390));
+        background.add(cardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 440, 390));
 
         dateLabel.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         dateLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -453,6 +448,14 @@ public class ChoiceCard extends javax.swing.JPanel {
         gameState.checkIfWon(cardPanel);
         changeCard(MainClass.getCardList());
     }//GEN-LAST:event_goLeftPanelMouseClicked
+
+    private void goRightPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goRightPanelMouseEntered
+
+    }//GEN-LAST:event_goRightPanelMouseEntered
+
+    private void goRightPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goRightPanelMouseExited
+
+    }//GEN-LAST:event_goRightPanelMouseExited
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

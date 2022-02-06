@@ -4,6 +4,7 @@
  */
 package Logic;
 
+import GUI.ChoiceCard;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -14,6 +15,7 @@ import javax.swing.JPanel;
  */
 public class GameState {
     private int turnCounter;
+    private ChoiceCard choiceCardMenu;
 
     public int getTurnCounter() {
         return turnCounter;
@@ -23,14 +25,14 @@ public class GameState {
         this.turnCounter = turnCounter;
     }
 
-    public GameState() {
+    public GameState(ChoiceCard choiceCardMenu) {
         this.turnCounter = 0;
+        this.choiceCardMenu = choiceCardMenu;
     }
     
     public void checkIfWon(JPanel parentComponent) {
         if (turnCounter == 20) {
-            JOptionPane.showMessageDialog(parentComponent, "Ganaste, papu");
-            System.exit(0);
+            choiceCardMenu.showWinPanel();
         }
     }
     

@@ -14,8 +14,8 @@ import Logic.ElementsInstantiation;
  */
 public class TutorialPanel extends javax.swing.JPanel {
     private int currentTutorial;
-    private GameCharacter tutorialMan = new GameCharacter(ElementsInstantiation.staticIcon("The_Barbarian.png"), "Hombre Tutorial", "");
-    private TutorialCard card1 = new TutorialCard(tutorialMan, "Hola, bienvenido a *inserte nombre del juego*. Este es un juego simple de decisiones. Da click en cualquiera de los dos paneles a los costados de la imagen para continuar. ", "Bienvenida");
+    private GameCharacter tutorialMan = new GameCharacter(ElementsInstantiation.staticIcon("tutorialMan210.png"), "Hombre Tutorial", "");
+    private TutorialCard card1 = new TutorialCard(tutorialMan, "Hola, bienvenido a Choice: El Juego. Este es un juego simple de decisiones. Da click en cualquiera de los dos paneles a los costados de la imagen para continuar. ", "Bienvenida");
     private TutorialCard card2 = new TutorialCard(tutorialMan, "Abajo ahora puedes ver una fecha que representa un día al azar en la oficina.", "Fecha");
     private TutorialCard card3 = new TutorialCard(tutorialMan, "Arriba ahora puedes observar el panel de información: A la izquierda está el ícono de personaje, tu usuario y puesto en la compañía. Y a la derecha están las estadísticas.", "Panel superior");
     private TutorialCard card4 = new TutorialCard(tutorialMan, "Las estadísticas, en orden descendiente, corresponden a la reputación de la empresa, el dinero de la empresa, la felicidad de los trabajadores y el impacto ambiental de la empresa.", "Estadísticas");
@@ -42,7 +42,7 @@ public class TutorialPanel extends javax.swing.JPanel {
     }
     
     private void paintCard(TutorialCard card) {
-        situationDescription.setText(card.getAspectToTeach()+": " + card.getSituation());
+        situationDescription.setText(card.getAspectToTeach()+":\n" + card.getSituation());
         characterIconLabel.setIcon(card.getCharacter().getCharacterIcon());
         characterNameLabel.setText(card.getCharacter().getName());
     }
@@ -233,7 +233,7 @@ public class TutorialPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        background.add(cardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 200, -1, -1));
+        background.add(cardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, -1));
 
         statPanel.setBackground(new java.awt.Color(94, 131, 186));
 
@@ -356,62 +356,58 @@ public class TutorialPanel extends javax.swing.JPanel {
     private void goLeftPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goLeftPanelMouseClicked
         int i = currentTutorial;
         switch (i) {
-            case 1:
+            case 1 -> {
                 secondCard();
                 setCurrentTutorial(i+1);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 thirdCard();
                 setCurrentTutorial(i+1);
-                break;
-            case 3:
+            }
+            case 3 -> {
                 paintCard(card4);
                 setCurrentTutorial(i+1);
-                break;
-            case 4:
+            }
+            case 4 -> {
                 paintCard(card5);
                 setCurrentTutorial(i+1);
-                break;
-            case 5:
+            }
+            case 5 -> {
                 paintCard(card6);
                 setCurrentTutorial(i+1);
-                break;
-            case 6:
-                MainFrame.initiateGameMenu(this);
-                break;
-            default:
-                break;
+            }
+            case 6 -> MainFrame.initiateGameMenu(this);
+            default -> {
+            }
         }
     }//GEN-LAST:event_goLeftPanelMouseClicked
 
     private void goRightPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goRightPanelMouseClicked
         int i = currentTutorial;
         switch (i) {
-            case 1:
+            case 1 -> {
                 secondCard();
                 setCurrentTutorial(i+1);
-                break;
-            case 2:
+            }
+            case 2 -> {
                 thirdCard();
                 setCurrentTutorial(i+1);
-                break;
-            case 3:
+            }
+            case 3 -> {
                 paintCard(card4);
                 setCurrentTutorial(i+1);
-                break;
-            case 4:
+            }
+            case 4 -> {
                 paintCard(card5);
                 setCurrentTutorial(i+1);
-                break;
-            case 5:
+            }
+            case 5 -> {
                 paintCard(card6);
                 setCurrentTutorial(i+1);
-                break;
-            case 6:
-                MainFrame.initiateGameMenu(this);
-                break;
-            default:
-                break;
+            }
+            case 6 -> MainFrame.initiateGameMenu(this);
+            default -> {
+            }
         }
     }//GEN-LAST:event_goRightPanelMouseClicked
 

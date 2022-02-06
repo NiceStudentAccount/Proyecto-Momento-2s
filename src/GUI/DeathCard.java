@@ -28,7 +28,7 @@ public class DeathCard extends javax.swing.JPanel {
     }
     
     private void paintCard() {
-        situationDescription.setText(failureCard.getSituation());
+        situationDescription.setText(failureCard.getCharacter().getPrefix() + ", " + failureCard.getSituation());
         characterIconLabel.setIcon(failureCard.getCharacter().getCharacterIcon());
         characterNameLabel.setText(failureCard.getCharacter().getName());
     }

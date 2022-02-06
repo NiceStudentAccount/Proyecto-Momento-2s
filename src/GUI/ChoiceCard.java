@@ -14,7 +14,9 @@ import Logic.MainClass;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
@@ -24,6 +26,7 @@ import javax.swing.Timer;
  * @author samyg
  */
 public class ChoiceCard extends javax.swing.JPanel {
+    private Calendar dates;
     private List<DecisionCard> gameCards;
     private DecisionCard choice;
     private Stat statusStat;
@@ -31,15 +34,22 @@ public class ChoiceCard extends javax.swing.JPanel {
     private Stat happinessStat;
     private Stat environmentStat;
     private GameState gameState;
+    
 
     /**
      * Creates new form DisplayGuide
      */
-    public ChoiceCard(List<DecisionCard> gameCards) {
+    public ChoiceCard() {
         initComponents();
         
-        this.gameState = new GameState();
-        this.gameCards = gameCards;
+        setNames();
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(2016, 2, 17);
+        this.dates = cal;
+        setDateLabel();
+        
+        this.gameCards = ElementsInstantiation.createDecisionsList();
         
         setChoice(gameCards.get(0));
         paintCard();
@@ -55,6 +65,8 @@ public class ChoiceCard extends javax.swing.JPanel {
         this.moneyBar.setValue(moneyStat.getValue());
         this.happinessBar.setValue(happinessStat.getValue());
         this.environmentBar.setValue(environmentStat.getValue());
+        
+        this.gameState = new GameState(this);
         
     }
 
@@ -104,7 +116,7 @@ public class ChoiceCard extends javax.swing.JPanel {
     }
     
     public void paintCard() {
-        situationDescription.setText(choice.getSituation());
+        situationDescription.setText(choice.getCharacter().getPrefix() + ", " + choice.getSituation());
         characterIconLabel.setIcon(choice.getCharacter().getCharacterIcon());
         characterNameLabel.setText(choice.getCharacter().getName());
     }
@@ -141,53 +153,58 @@ public class ChoiceCard extends javax.swing.JPanel {
     
     public void checkIfLoose() {
         if (statusStat.getValue() == 0) {
-            GameCharacter statusCharacter = ElementsInstantiation.getCharacter1();
+            GameCharacter statusCharacter = ElementsInstantiation.getChar1();
             GameOverCard statusMinEnd = new GameOverCard(statusCharacter, "Nuestra reputación está por el piso y la gente está muy enojada con nosotros.", "La gente inició una campaña de cancelación contra la compañía. Ésta fue demasiado fuerte y las acciones de la empresa cayeron en picada.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
             DeathCard statusMinPanel = new DeathCard(statusMinEnd);
             MainClass.repaintMenu(statusMinPanel, cardPanel);
         }
         else if (statusStat.getValue() == 120) {
-            GameCharacter statusCharacter = ElementsInstantiation.getCharacter1();
+            GameCharacter statusCharacter = ElementsInstantiation.getChar1();
             GameOverCard statusMaxEnd = new GameOverCard(statusCharacter, "Somos demasiado queridos por todo el mundo... Tanto que hay políticos usando nuestro nombre a su favor sin nuestro permiso", "La gente perdió la fe en la compañía gracias a los políticos que usaban su nombre. La empresa perdió sus clientes y cayó en bancarrota.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
             DeathCard statusMaxPanel = new DeathCard(statusMaxEnd);
             MainClass.repaintMenu(statusMaxPanel, cardPanel);
         }
         else if (moneyStat.getValue() == 0) {
-            GameCharacter moneyCharacter = ElementsInstantiation.getCharacter2();
+            GameCharacter moneyCharacter = ElementsInstantiation.getChar2();
             GameOverCard moneyMinEnd = new GameOverCard(moneyCharacter, "La empresa está practicamente quebrada. Los inversionistas estamos muy preocupados por su desempeño en el manejo del negocio...", "Los inversionistas decidieron vender sus acciones antes de que perdieran todo valor y la empresa quedó a la deriva esperando comprador.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
             DeathCard moneyMinPanel = new DeathCard(moneyMinEnd);
             MainClass.repaintMenu(moneyMinPanel, cardPanel);
         }
         else if (moneyStat.getValue() == 120) {
-            GameCharacter moneyCharacter = ElementsInstantiation.getCharacter2();
+            GameCharacter moneyCharacter = ElementsInstantiation.getChar2();
             GameOverCard moneyMaxEnd = new GameOverCard(moneyCharacter, "Ser socio de esta empresa es igual a hacerse rico. Los inversionistas estamos muy alegres con usted...", "Los inversionistas se adjudicaron el éxito capital de la empresa, por lo que tomaron control sobre la misma quitándote todo poder de decisión.", ElementsInstantiation.staticIcon("calavera.png"), this);
             DeathCard moneyMaxPanel = new DeathCard(moneyMaxEnd);
             MainClass.repaintMenu(moneyMaxPanel, cardPanel);
         }
         else if (happinessStat.getValue() == 0) {
-            GameCharacter happinessCharacter = ElementsInstantiation.getCharacter3();
+            GameCharacter happinessCharacter = ElementsInstantiation.getChar1();
             GameOverCard happinessMinEnd = new GameOverCard(happinessCharacter, "Sus empleados están extremadamente descontentos con usted. Nadie quiere trabajar sabiendo que es usted quien está al mando...", "Muchos empleados renunciaron de sus trabajos y los que no iniciaron una huelga donde se exigía tu renuncia del cargo. La presión te hizo dimitir del puesto.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
             DeathCard happinessMinPanel = new DeathCard(happinessMinEnd);
             MainClass.repaintMenu(happinessMinPanel, cardPanel);
         }
         else if (happinessStat.getValue() == 120) {
-            GameCharacter happinessCharacter = ElementsInstantiation.getCharacter3();
+            GameCharacter happinessCharacter = ElementsInstantiation.getChar1();
             GameOverCard happinessMaxEnd = new GameOverCard(happinessCharacter, "Los empleados están demasiado felices en sus puestos de trabajo y le tienen mucha confianza. Demasiada tal vez...", "La gente, al saber que no habría consecuencias, se tomaba la libertad de no ir a trabajar o de holgazanear en el trabajo, por lo que la productividad de la empresa cayó dramáticamente.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
             DeathCard happinessMaxPanel = new DeathCard(happinessMaxEnd);
             MainClass.repaintMenu(happinessMaxPanel, cardPanel);
         }
         else if (environmentStat.getValue() == 0) {
-            GameCharacter environmentCharacter = ElementsInstantiation.getCharacter4();
+            GameCharacter environmentCharacter = ElementsInstantiation.getChar2();
             GameOverCard environmentMinEnd = new GameOverCard(environmentCharacter, "El gobierno hoy nos hizo llegar una carta bastante negra para la empresa...", "El gobierno local ha recibido muchas quejas de las actividades de la empresa alegando que el negocio hacía mucho daño al medio ambiente, por lo que decidieron suspender las actividades de la empresa.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
             DeathCard environmentMinPanel = new DeathCard(environmentMinEnd);
             MainClass.repaintMenu(environmentMinPanel, cardPanel);
         }
         else if (environmentStat.getValue() == 120) {
-            GameCharacter environmentCharacter = ElementsInstantiation.getCharacter4();
-            GameOverCard environmentMaxEnd = new GameOverCard(environmentCharacter, "Hoy me llamó el encargado del cuidado al medio ambiente en el gobierno y me dijo que quiere tener una reunión de urgencia con usted y parece ser grave...", "Los encargados del gobierno te amenazan de muerte diciendo que debes cooperar con ellos, convirtiendo a la empresa en una tapadera para que el gobierno pueda atentar contra el ambiente sin llamar la atención.", ElementsInstantiation.staticIcon("calaverIcon.png"), this);
+            GameCharacter environmentCharacter = ElementsInstantiation.getChar2();
+            GameOverCard environmentMaxEnd = new GameOverCard(environmentCharacter, "Hoy me llamó el encargado del cuidado al medio ambiente en el gobierno y me dijo que quiere tener una reunión de urgencia con usted y parece ser grave...", "Los encargados del gobierno te amenazan de muerte diciendo que debes cooperar con ellos, convirtiendo a la empresa en una tapadera para que el gobierno pueda atentar contra el ambiente sin llamar la atención.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
             DeathCard environmentMaxPanel = new DeathCard(environmentMaxEnd);
             MainClass.repaintMenu(environmentMaxPanel, cardPanel);
         }
+    }
+    
+    public void showWinPanel() {
+        VictoryPanel victory = new VictoryPanel(this);
+        MainClass.repaintMenu(victory, cardPanel);
     }
     
     public void changeCard(List<DecisionCard> choices) {
@@ -216,8 +233,36 @@ public class ChoiceCard extends javax.swing.JPanel {
     }
     
     public void playAgain() {
-        ChoiceCard newChoiceCard = new ChoiceCard(ElementsInstantiation.createDecisionsList());
+        ChoiceCard newChoiceCard = new ChoiceCard();
         MainClass.repaintMenu(newChoiceCard, this);
+    }
+    
+    public void setDateLabel() {
+        String date = "";
+        date += dates.get(Calendar.DAY_OF_MONTH) + " de " + MainClass.intToMonth(dates.get(Calendar.MONTH)) + " de " + dates.get(Calendar.YEAR);
+        dateLabel.setText(date);
+    }
+    
+    public void changeDate() {
+        int originalMonth = dates.get(Calendar.MONTH);
+        int originalYear = dates.get(Calendar.YEAR);
+        int finalMonth, finalYear;
+        if (originalMonth+2 <=11) {
+            finalMonth = originalMonth+2;
+            finalYear = originalYear;
+        } else {
+            finalYear = originalYear+1;
+            finalMonth = originalMonth+2-12;
+        }
+        dates.set(finalYear, finalMonth, new Random().nextInt(30)+1);
+        setDateLabel();
+    }
+    
+    public void setNames() {
+        String userName = JOptionPane.showInputDialog("Ingresa tu nombre:");
+        String companyName = JOptionPane.showInputDialog("Ingresa el nombre de la compañía:");
+        username.setText(userName);
+        businessName.setText("C.E.O. de " + companyName);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -499,9 +544,9 @@ public class ChoiceCard extends javax.swing.JPanel {
         datePanelLayout.setHorizontalGroup(
             datePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(datePanelLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(dateLabel)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(dateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+                .addContainerGap())
         );
         datePanelLayout.setVerticalGroup(
             datePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -530,7 +575,11 @@ public class ChoiceCard extends javax.swing.JPanel {
         gameState.setTurnCounter(gameState.getTurnCounter() + 1);
         checkIfLoose();
         gameState.checkIfWon(cardPanel);
-        changeCard(gameCards);
+        if (gameCards.size() > 1) {
+            changeCard(gameCards);
+            changeDate();
+        }
+        
     }//GEN-LAST:event_goRightPanelMouseClicked
 
     private void goLeftPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goLeftPanelMouseClicked
@@ -539,7 +588,10 @@ public class ChoiceCard extends javax.swing.JPanel {
         gameState.setTurnCounter(gameState.getTurnCounter() + 1);
         checkIfLoose();
         gameState.checkIfWon(cardPanel);
-        changeCard(gameCards);
+        if (gameCards.size() > 1) {
+            changeCard(gameCards);
+            changeDate();
+        }
     }//GEN-LAST:event_goLeftPanelMouseClicked
 
 

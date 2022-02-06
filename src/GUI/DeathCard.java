@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import Data.GameOverCard;
+import Logic.MainClass;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -13,19 +15,24 @@ import javax.swing.JTextArea;
  * @author samyg
  */
 public class DeathCard extends javax.swing.JPanel {
-
+    private GameOverCard failureCard;
     /**
      * Creates new form GameOverScreen
      */
-    public DeathCard(String description, Icon failureIcon) {
+    public DeathCard(GameOverCard failureCard) {
         initComponents();
-        setComponents(description, failureIcon);
+        
+        this.failureCard = failureCard;
+        
+        paintCard();
     }
     
-    private void setComponents(String description, Icon failureIcon) {
-        descriptionArea.setText(description);
-        failureLabel.setIcon(failureIcon);
+    private void paintCard() {
+        situationDescription.setText(failureCard.getSituation());
+        characterIconLabel.setIcon(failureCard.getCharacter().getCharacterIcon());
+        characterNameLabel.setText(failureCard.getCharacter().getName());
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,24 +44,98 @@ public class DeathCard extends javax.swing.JPanel {
     private void initComponents() {
 
         background = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        descriptionArea = new javax.swing.JTextArea();
-        failureLabel = new javax.swing.JLabel();
+        goLeftPanel = new javax.swing.JPanel();
+        noLabel = new javax.swing.JLabel();
+        characterIconLabel = new javax.swing.JLabel();
+        situationPane = new javax.swing.JScrollPane();
+        situationDescription = new javax.swing.JTextArea();
+        characterNameLabel = new javax.swing.JLabel();
+        goRightPanel = new javax.swing.JPanel();
+        yesLabel = new javax.swing.JLabel();
 
-        descriptionArea.setEditable(false);
-        descriptionArea.setBackground(new java.awt.Color(255, 255, 255));
-        descriptionArea.setColumns(20);
-        descriptionArea.setForeground(new java.awt.Color(0, 0, 0));
-        descriptionArea.setLineWrap(true);
-        descriptionArea.setRows(5);
+        background.setBackground(new java.awt.Color(194, 210, 233));
+
+        goLeftPanel.setBackground(new java.awt.Color(255, 51, 51));
+        goLeftPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        goLeftPanel.setPreferredSize(new java.awt.Dimension(100, 120));
+        goLeftPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goLeftPanelMouseClicked(evt);
+            }
+        });
+
+        noLabel.setFont(new java.awt.Font("Dialog", 0, 22)); // NOI18N
+        noLabel.setForeground(new java.awt.Color(0, 0, 0));
+        noLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("GUI/Bundle"); // NOI18N
-        descriptionArea.setText(bundle.getString("DeathCard.descriptionArea.text")); // NOI18N
-        descriptionArea.setWrapStyleWord(true);
-        descriptionArea.setBorder(null);
-        jScrollPane2.setViewportView(descriptionArea);
+        noLabel.setText(bundle.getString("DeathCard.noLabel.text")); // NOI18N
 
-        failureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sources/The_Jester.png"))); // NOI18N
-        failureLabel.setText(bundle.getString("DeathCard.failureLabel.text")); // NOI18N
+        javax.swing.GroupLayout goLeftPanelLayout = new javax.swing.GroupLayout(goLeftPanel);
+        goLeftPanel.setLayout(goLeftPanelLayout);
+        goLeftPanelLayout.setHorizontalGroup(
+            goLeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(goLeftPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(noLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        goLeftPanelLayout.setVerticalGroup(
+            goLeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(goLeftPanelLayout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(noLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        characterIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sources/The_Jester.png"))); // NOI18N
+        characterIconLabel.setText(bundle.getString("DeathCard.characterIconLabel.text")); // NOI18N
+
+        situationDescription.setEditable(false);
+        situationDescription.setBackground(new java.awt.Color(255, 255, 255));
+        situationDescription.setColumns(20);
+        situationDescription.setForeground(new java.awt.Color(0, 0, 0));
+        situationDescription.setLineWrap(true);
+        situationDescription.setRows(5);
+        situationDescription.setText(bundle.getString("DeathCard.situationDescription.text")); // NOI18N
+        situationDescription.setWrapStyleWord(true);
+        situationDescription.setBorder(null);
+        situationPane.setViewportView(situationDescription);
+
+        characterNameLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        characterNameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        characterNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        characterNameLabel.setText(bundle.getString("DeathCard.characterNameLabel.text")); // NOI18N
+
+        goRightPanel.setBackground(new java.awt.Color(255, 51, 51));
+        goRightPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        goRightPanel.setPreferredSize(new java.awt.Dimension(100, 128));
+        goRightPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                goRightPanelMouseClicked(evt);
+            }
+        });
+
+        yesLabel.setFont(new java.awt.Font("Dialog", 0, 22)); // NOI18N
+        yesLabel.setForeground(new java.awt.Color(0, 0, 0));
+        yesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        yesLabel.setText(bundle.getString("DeathCard.yesLabel.text")); // NOI18N
+
+        javax.swing.GroupLayout goRightPanelLayout = new javax.swing.GroupLayout(goRightPanel);
+        goRightPanel.setLayout(goRightPanelLayout);
+        goRightPanelLayout.setHorizontalGroup(
+            goRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(goRightPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(yesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        goRightPanelLayout.setVerticalGroup(
+            goRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(goRightPanelLayout.createSequentialGroup()
+                .addGap(88, 88, 88)
+                .addComponent(yesLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
@@ -62,21 +143,33 @@ public class DeathCard extends javax.swing.JPanel {
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(characterNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(backgroundLayout.createSequentialGroup()
+                                .addComponent(goLeftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(characterIconLabel)
+                                .addGap(15, 15, 15)
+                                .addComponent(goRightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+                            .addComponent(situationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 15, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(115, 115, 115)
-                .addComponent(failureLabel)
-                .addContainerGap(115, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(failureLabel)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addComponent(situationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(goLeftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                    .addComponent(characterIconLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(goRightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(characterNameLabel)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -91,11 +184,24 @@ public class DeathCard extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void goRightPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goRightPanelMouseClicked
+        MainClass.repaintMenu(failureCard.getDeathCard(), this);
+    }//GEN-LAST:event_goRightPanelMouseClicked
+
+    private void goLeftPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_goLeftPanelMouseClicked
+        MainClass.repaintMenu(failureCard.getDeathCard(), this);
+    }//GEN-LAST:event_goLeftPanelMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
-    private javax.swing.JTextArea descriptionArea;
-    private javax.swing.JLabel failureLabel;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel characterIconLabel;
+    private javax.swing.JLabel characterNameLabel;
+    private javax.swing.JPanel goLeftPanel;
+    private javax.swing.JPanel goRightPanel;
+    private javax.swing.JLabel noLabel;
+    private javax.swing.JTextArea situationDescription;
+    private javax.swing.JScrollPane situationPane;
+    private javax.swing.JLabel yesLabel;
     // End of variables declaration//GEN-END:variables
 }

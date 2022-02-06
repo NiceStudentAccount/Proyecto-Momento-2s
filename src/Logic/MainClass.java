@@ -21,14 +21,8 @@ import javax.swing.JPanel;
  * @author samyg
  */
 public class MainClass {
-    private static List<DecisionCard> cardList = ElementsInstantiation.createDecisionsList(); 
-
-    public static List<DecisionCard> getCardList() {
-        return cardList;
-    }
             
     public static void main(String[] args) {
-        Collections.shuffle(cardList);
         MainFrame.runMainFrame();
     }
     

@@ -29,7 +29,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         
         this.setTitle("Choice: El Juego");
-        this.choiceCardMenu = new ChoiceCard(MainClass.getCardList());
+        this.choiceCardMenu = new ChoiceCard(ElementsInstantiation.createDecisionsList());
         this.gameTutorial = new TutorialPanel();
         this.setLocationRelativeTo(null);
     }

@@ -5,10 +5,13 @@
 package GUI;
 
 import Data.DecisionCard;
+import Data.GameCharacter;
+import Data.GameOverCard;
 import Data.Stat;
 import Logic.ElementsInstantiation;
 import Logic.GameState;
 import Logic.MainClass;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -40,6 +43,8 @@ public class ChoiceCard extends javax.swing.JPanel {
         
         setChoice(gameCards.get(0));
         paintCard();
+        
+        ElementsInstantiation.resetStats();
         
         this.statusStat = ElementsInstantiation.getStatusStat();
         this.moneyStat = ElementsInstantiation.getMoneyStat();
@@ -126,10 +131,62 @@ public class ChoiceCard extends javax.swing.JPanel {
         }
     }
     
+    public void darkMenu() {
+        statsPanel.setBackground(Color.decode("#3A4E7A"));
+        businessName.setBackground(Color.decode("#3A4E7A"));
+        datePanel.setBackground(Color.decode("#3A4E7A"));
+        cardPanel.setBackground(Color.decode("#5E83BA"));
+        background.setBackground(Color.decode("#091D36"));
+    }
+    
     public void checkIfLoose() {
-        if (statusStat.getValue() == 0 || statusStat.getValue() == 120 || moneyStat.getValue() == 0 || moneyStat.getValue() == 120 || happinessStat.getValue() == 0 || happinessStat.getValue() == 120 || environmentStat.getValue() == 0 || environmentStat.getValue() == 120) {
-            JOptionPane.showMessageDialog(cardPanel, "Perdiste por gei");
-            System.exit(0);
+        if (statusStat.getValue() == 0) {
+            GameCharacter statusCharacter = ElementsInstantiation.getCharacter1();
+            GameOverCard statusMinEnd = new GameOverCard(statusCharacter, "Nuestra reputación está por el piso y la gente está muy enojada con nosotros.", "La gente inició una campaña de cancelación contra la compañía. Ésta fue demasiado fuerte y las acciones de la empresa cayeron en picada.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
+            DeathCard statusMinPanel = new DeathCard(statusMinEnd);
+            MainClass.repaintMenu(statusMinPanel, cardPanel);
+        }
+        else if (statusStat.getValue() == 120) {
+            GameCharacter statusCharacter = ElementsInstantiation.getCharacter1();
+            GameOverCard statusMaxEnd = new GameOverCard(statusCharacter, "Somos demasiado queridos por todo el mundo... Tanto que hay políticos usando nuestro nombre a su favor sin nuestro permiso", "La gente perdió la fe en la compañía gracias a los políticos que usaban su nombre. La empresa perdió sus clientes y cayó en bancarrota.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
+            DeathCard statusMaxPanel = new DeathCard(statusMaxEnd);
+            MainClass.repaintMenu(statusMaxPanel, cardPanel);
+        }
+        else if (moneyStat.getValue() == 0) {
+            GameCharacter moneyCharacter = ElementsInstantiation.getCharacter2();
+            GameOverCard moneyMinEnd = new GameOverCard(moneyCharacter, "La empresa está practicamente quebrada. Los inversionistas estamos muy preocupados por su desempeño en el manejo del negocio...", "Los inversionistas decidieron vender sus acciones antes de que perdieran todo valor y la empresa quedó a la deriva esperando comprador.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
+            DeathCard moneyMinPanel = new DeathCard(moneyMinEnd);
+            MainClass.repaintMenu(moneyMinPanel, cardPanel);
+        }
+        else if (moneyStat.getValue() == 120) {
+            GameCharacter moneyCharacter = ElementsInstantiation.getCharacter2();
+            GameOverCard moneyMaxEnd = new GameOverCard(moneyCharacter, "Ser socio de esta empresa es igual a hacerse rico. Los inversionistas estamos muy alegres con usted...", "Los inversionistas se adjudicaron el éxito capital de la empresa, por lo que tomaron control sobre la misma quitándote todo poder de decisión.", ElementsInstantiation.staticIcon("calavera.png"), this);
+            DeathCard moneyMaxPanel = new DeathCard(moneyMaxEnd);
+            MainClass.repaintMenu(moneyMaxPanel, cardPanel);
+        }
+        else if (happinessStat.getValue() == 0) {
+            GameCharacter happinessCharacter = ElementsInstantiation.getCharacter3();
+            GameOverCard happinessMinEnd = new GameOverCard(happinessCharacter, "Sus empleados están extremadamente descontentos con usted. Nadie quiere trabajar sabiendo que es usted quien está al mando...", "Muchos empleados renunciaron de sus trabajos y los que no iniciaron una huelga donde se exigía tu renuncia del cargo. La presión te hizo dimitir del puesto.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
+            DeathCard happinessMinPanel = new DeathCard(happinessMinEnd);
+            MainClass.repaintMenu(happinessMinPanel, cardPanel);
+        }
+        else if (happinessStat.getValue() == 120) {
+            GameCharacter happinessCharacter = ElementsInstantiation.getCharacter3();
+            GameOverCard happinessMaxEnd = new GameOverCard(happinessCharacter, "Los empleados están demasiado felices en sus puestos de trabajo y le tienen mucha confianza. Demasiada tal vez...", "La gente, al saber que no habría consecuencias, se tomaba la libertad de no ir a trabajar o de holgazanear en el trabajo, por lo que la productividad de la empresa cayó dramáticamente.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
+            DeathCard happinessMaxPanel = new DeathCard(happinessMaxEnd);
+            MainClass.repaintMenu(happinessMaxPanel, cardPanel);
+        }
+        else if (environmentStat.getValue() == 0) {
+            GameCharacter environmentCharacter = ElementsInstantiation.getCharacter4();
+            GameOverCard environmentMinEnd = new GameOverCard(environmentCharacter, "El gobierno hoy nos hizo llegar una carta bastante negra para la empresa...", "El gobierno local ha recibido muchas quejas de las actividades de la empresa alegando que el negocio hacía mucho daño al medio ambiente, por lo que decidieron suspender las actividades de la empresa.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
+            DeathCard environmentMinPanel = new DeathCard(environmentMinEnd);
+            MainClass.repaintMenu(environmentMinPanel, cardPanel);
+        }
+        else if (environmentStat.getValue() == 120) {
+            GameCharacter environmentCharacter = ElementsInstantiation.getCharacter4();
+            GameOverCard environmentMaxEnd = new GameOverCard(environmentCharacter, "Hoy me llamó el encargado del cuidado al medio ambiente en el gobierno y me dijo que quiere tener una reunión de urgencia con usted y parece ser grave...", "Los encargados del gobierno te amenazan de muerte diciendo que debes cooperar con ellos, convirtiendo a la empresa en una tapadera para que el gobierno pueda atentar contra el ambiente sin llamar la atención.", ElementsInstantiation.staticIcon("calaverIcon.png"), this);
+            DeathCard environmentMaxPanel = new DeathCard(environmentMaxEnd);
+            MainClass.repaintMenu(environmentMaxPanel, cardPanel);
         }
     }
     
@@ -156,6 +213,11 @@ public class ChoiceCard extends javax.swing.JPanel {
         };
         Timer timer = new Timer(25, actionListener);
         timer.start();
+    }
+    
+    public void playAgain() {
+        ChoiceCard newChoiceCard = new ChoiceCard(ElementsInstantiation.createDecisionsList());
+        MainClass.repaintMenu(newChoiceCard, this);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -332,6 +394,7 @@ public class ChoiceCard extends javax.swing.JPanel {
 
         goLeftPanel.setBackground(new java.awt.Color(194, 210, 233));
         goLeftPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        goLeftPanel.setPreferredSize(new java.awt.Dimension(100, 210));
         goLeftPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 goLeftPanelMouseClicked(evt);
@@ -340,7 +403,6 @@ public class ChoiceCard extends javax.swing.JPanel {
 
         noLabel.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         noLabel.setForeground(new java.awt.Color(0, 0, 0));
-        noLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         noLabel.setText(bundle.getString("ChoiceCard.noLabel.text")); // NOI18N
 
         javax.swing.GroupLayout goLeftPanelLayout = new javax.swing.GroupLayout(goLeftPanel);
@@ -348,15 +410,15 @@ public class ChoiceCard extends javax.swing.JPanel {
         goLeftPanelLayout.setHorizontalGroup(
             goLeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, goLeftPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(noLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(noLabel)
+                .addGap(27, 27, 27))
         );
         goLeftPanelLayout.setVerticalGroup(
             goLeftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(goLeftPanelLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addComponent(noLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81)
+                .addComponent(noLabel)
                 .addContainerGap(82, Short.MAX_VALUE))
         );
 
@@ -377,34 +439,34 @@ public class ChoiceCard extends javax.swing.JPanel {
         goRightPanel.setLayout(goRightPanelLayout);
         goRightPanelLayout.setHorizontalGroup(
             goRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, goRightPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(yesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(goRightPanelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(yesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         goRightPanelLayout.setVerticalGroup(
             goRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, goRightPanelLayout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
+            .addGroup(goRightPanelLayout.createSequentialGroup()
+                .addGap(81, 81, 81)
                 .addComponent(yesLabel)
-                .addGap(76, 76, 76))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout cardPanelLayout = new javax.swing.GroupLayout(cardPanel);
         cardPanel.setLayout(cardPanelLayout);
         cardPanelLayout.setHorizontalGroup(
             cardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cardPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(cardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(cardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(situationPane)
-                    .addGroup(cardPanelLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, cardPanelLayout.createSequentialGroup()
                         .addComponent(goLeftPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(12, 12, 12)
                         .addComponent(characterIconLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(goRightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(characterNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(characterNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         cardPanelLayout.setVerticalGroup(
@@ -414,14 +476,11 @@ public class ChoiceCard extends javax.swing.JPanel {
                 .addComponent(situationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(cardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardPanelLayout.createSequentialGroup()
-                        .addComponent(characterIconLabel)
-                        .addGap(26, 26, 26))
-                    .addGroup(cardPanelLayout.createSequentialGroup()
-                        .addGroup(cardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(goLeftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(goRightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                    .addComponent(goLeftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(cardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(goRightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(characterIconLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(26, 26, 26)
                 .addComponent(characterNameLabel)
                 .addContainerGap())
         );

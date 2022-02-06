@@ -10,6 +10,7 @@ import Data.GameCharacter;
 import Data.Stat;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.Icon;
@@ -204,6 +205,31 @@ public class ElementsInstantiation {
     private static String situation20 = "Amor?";
     private static DecisionCard card20 = new DecisionCard(character20, situation20, yesCon20, noCon20);
     //-------------------------------------------------------------------------------------------------------------------------------------------
+
+    public static GameCharacter getCharacter1() {
+        return character1;
+    }
+
+    public static GameCharacter getCharacter2() {
+        return character2;
+    }
+
+    public static GameCharacter getCharacter3() {
+        return character3;
+    }
+
+    public static GameCharacter getCharacter4() {
+        return character4;
+    }
+    
+    public static void resetStats() {
+        statusStat.setValue(60);
+        moneyStat.setValue(60);
+        happinessStat.setValue(60);
+        environmentStat.setValue(60);
+    }
+    
+    
     
     public static Icon staticIcon(String path) {
         URL resource = ElementsInstantiation.class.getResource("/Sources/" + path);
@@ -232,6 +258,7 @@ public class ElementsInstantiation {
         decisionList.add(card18);
         decisionList.add(card19);
         decisionList.add(card20);
+        Collections.shuffle(decisionList);
         return decisionList;
     }
 }

@@ -172,7 +172,7 @@ public class ChoiceCard extends javax.swing.JPanel {
         }
         else if (moneyStat.getValue() == 120) {
             GameCharacter moneyCharacter = ElementsInstantiation.getChar2();
-            GameOverCard moneyMaxEnd = new GameOverCard(moneyCharacter, "Ser socio de esta empresa es igual a hacerse rico. Los inversionistas estamos muy alegres con usted...", "Los inversionistas se adjudicaron el éxito capital de la empresa, por lo que tomaron control sobre la misma quitándote todo poder de decisión.", ElementsInstantiation.staticIcon("calavera.png"), this);
+            GameOverCard moneyMaxEnd = new GameOverCard(moneyCharacter, "Ser socio de esta empresa es igual a hacerse rico. Los inversionistas estamos muy alegres con usted...", "Los inversionistas se adjudicaron el éxito capital de la empresa, por lo que tomaron control sobre la misma quitándote todo poder de decisión.", ElementsInstantiation.staticIcon("calaveraIcon.png"), this);
             DeathCard moneyMaxPanel = new DeathCard(moneyMaxEnd);
             MainClass.repaintMenu(moneyMaxPanel, cardPanel);
         }

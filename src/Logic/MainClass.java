@@ -8,9 +8,12 @@ import Data.Card;
 import Data.DecisionCard;
 import GUI.MainFrame;
 import java.awt.BorderLayout;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
@@ -26,9 +29,13 @@ public class MainClass {
             
     public static void main(String[] args) {
         Collections.shuffle(cardList);
-        MainFrame mainFrame = new MainFrame();
-        mainFrame.runMainFrame();
+        MainFrame.runMainFrame();
     }
+    
+    public static ImageIcon staticImage(String path) {
+        URL resource = ElementsInstantiation.class.getResource("/Sources/" + path);
+        return new ImageIcon(resource);
+    } 
     
     public static void repaintMenu(JPanel panel, JPanel contentPanel) {
         panel.setSize(contentPanel.getWidth(), contentPanel.getHeight());

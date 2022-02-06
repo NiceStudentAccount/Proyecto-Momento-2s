@@ -12,12 +12,12 @@ import javax.swing.JTextArea;
  *
  * @author samyg
  */
-public class GameOverScreen extends javax.swing.JPanel {
+public class DeathCard extends javax.swing.JPanel {
 
     /**
      * Creates new form GameOverScreen
      */
-    public GameOverScreen(String description, Icon failureIcon) {
+    public DeathCard(String description, Icon failureIcon) {
         initComponents();
         setComponents(description, failureIcon);
     }
@@ -48,13 +48,13 @@ public class GameOverScreen extends javax.swing.JPanel {
         descriptionArea.setLineWrap(true);
         descriptionArea.setRows(5);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("GUI/Bundle"); // NOI18N
-        descriptionArea.setText(bundle.getString("GameOverScreen.descriptionArea.text")); // NOI18N
+        descriptionArea.setText(bundle.getString("DeathCard.descriptionArea.text")); // NOI18N
         descriptionArea.setWrapStyleWord(true);
         descriptionArea.setBorder(null);
         jScrollPane2.setViewportView(descriptionArea);
 
         failureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sources/The_Jester.png"))); // NOI18N
-        failureLabel.setText(bundle.getString("GameOverScreen.failureLabel.text")); // NOI18N
+        failureLabel.setText(bundle.getString("DeathCard.failureLabel.text")); // NOI18N
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);

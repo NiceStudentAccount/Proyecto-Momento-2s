@@ -20,7 +20,7 @@ import javax.swing.Timer;
  *
  * @author samyg
  */
-public class ChoiceCard extends javax.swing.JPanel {
+public class ChoiceCard1 extends javax.swing.JPanel {
     private List<DecisionCard> gameCards;
     private DecisionCard choice;
     private Stat statusStat;
@@ -32,7 +32,7 @@ public class ChoiceCard extends javax.swing.JPanel {
     /**
      * Creates new form DisplayGuide
      */
-    public ChoiceCard(List<DecisionCard> gameCards) {
+    public ChoiceCard1(List<DecisionCard> gameCards) {
         initComponents();
         
         this.gameState = new GameState();
@@ -188,17 +188,16 @@ public class ChoiceCard extends javax.swing.JPanel {
         goLeftPanel = new javax.swing.JPanel();
         noLabel = new javax.swing.JLabel();
         goRightPanel = new javax.swing.JPanel();
-        yesLabel = new javax.swing.JLabel();
-        datePanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         dateLabel = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(520, 650));
 
-        background.setBackground(new java.awt.Color(58, 78, 122));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        statsPanel.setBackground(new java.awt.Color(94, 131, 186));
-        statsPanel.setPreferredSize(new java.awt.Dimension(520, 180));
+        statsPanel.setBackground(new java.awt.Color(255, 51, 0));
+        statsPanel.setPreferredSize(new java.awt.Dimension(520, 170));
 
         statusBar.setMaximum(120);
 
@@ -211,35 +210,34 @@ public class ChoiceCard extends javax.swing.JPanel {
         username.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         username.setForeground(new java.awt.Color(255, 255, 255));
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("GUI/Bundle"); // NOI18N
-        username.setText(bundle.getString("ChoiceCard.username.text")); // NOI18N
+        username.setText(bundle.getString("ChoiceCard1.username.text")); // NOI18N
 
         playerIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sources/empresarioicono.png"))); // NOI18N
-        playerIconLabel.setText(bundle.getString("ChoiceCard.playerIconLabel.text")); // NOI18N
+        playerIconLabel.setText(bundle.getString("ChoiceCard1.playerIconLabel.text")); // NOI18N
 
         businessName.setEditable(false);
-        businessName.setBackground(new java.awt.Color(94, 131, 186));
+        businessName.setBackground(new java.awt.Color(255, 51, 0));
         businessName.setColumns(20);
         businessName.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        businessName.setForeground(new java.awt.Color(255, 255, 255));
         businessName.setLineWrap(true);
         businessName.setRows(5);
-        businessName.setText(bundle.getString("ChoiceCard.businessName.text")); // NOI18N
+        businessName.setText(bundle.getString("ChoiceCard1.businessName.text")); // NOI18N
         businessName.setWrapStyleWord(true);
         businessName.setBorder(null);
         businessName.setPreferredSize(new java.awt.Dimension(280, 20));
         jScrollPane1.setViewportView(businessName);
 
         statusIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sources/reputacionIcon.png"))); // NOI18N
-        statusIcon.setText(bundle.getString("ChoiceCard.statusIcon.text")); // NOI18N
+        statusIcon.setText(bundle.getString("ChoiceCard1.statusIcon.text")); // NOI18N
 
         happinessIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sources/felicidadIcon.png"))); // NOI18N
-        happinessIcon.setText(bundle.getString("ChoiceCard.happinessIcon.text")); // NOI18N
+        happinessIcon.setText(bundle.getString("ChoiceCard1.happinessIcon.text")); // NOI18N
 
         environmentIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sources/arbolIcon.png"))); // NOI18N
-        environmentIcon.setText(bundle.getString("ChoiceCard.environmentIcon.text")); // NOI18N
+        environmentIcon.setText(bundle.getString("ChoiceCard1.environmentIcon.text")); // NOI18N
 
         moneyIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sources/dineroIcon.png"))); // NOI18N
-        moneyIcon.setText(bundle.getString("ChoiceCard.moneyIcon.text")); // NOI18N
+        moneyIcon.setText(bundle.getString("ChoiceCard1.moneyIcon.text")); // NOI18N
 
         javax.swing.GroupLayout statsPanelLayout = new javax.swing.GroupLayout(statsPanel);
         statsPanel.setLayout(statsPanelLayout);
@@ -309,15 +307,15 @@ public class ChoiceCard extends javax.swing.JPanel {
 
         background.add(statsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 180));
 
-        cardPanel.setBackground(new java.awt.Color(194, 210, 233));
+        cardPanel.setBackground(new java.awt.Color(255, 255, 51));
 
         characterNameLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         characterNameLabel.setForeground(new java.awt.Color(0, 0, 0));
         characterNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        characterNameLabel.setText(bundle.getString("ChoiceCard.characterNameLabel.text")); // NOI18N
+        characterNameLabel.setText(bundle.getString("ChoiceCard1.characterNameLabel.text")); // NOI18N
 
         characterIconLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Sources/The_Jester.png"))); // NOI18N
-        characterIconLabel.setText(bundle.getString("ChoiceCard.characterIconLabel.text")); // NOI18N
+        characterIconLabel.setText(bundle.getString("ChoiceCard1.characterIconLabel.text")); // NOI18N
 
         situationDescription.setEditable(false);
         situationDescription.setBackground(new java.awt.Color(255, 255, 255));
@@ -325,12 +323,12 @@ public class ChoiceCard extends javax.swing.JPanel {
         situationDescription.setForeground(new java.awt.Color(0, 0, 0));
         situationDescription.setLineWrap(true);
         situationDescription.setRows(5);
-        situationDescription.setText(bundle.getString("ChoiceCard.situationDescription.text")); // NOI18N
+        situationDescription.setText(bundle.getString("ChoiceCard1.situationDescription.text")); // NOI18N
         situationDescription.setWrapStyleWord(true);
         situationDescription.setBorder(null);
         situationPane.setViewportView(situationDescription);
 
-        goLeftPanel.setBackground(new java.awt.Color(194, 210, 233));
+        goLeftPanel.setBackground(new java.awt.Color(255, 255, 51));
         goLeftPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goLeftPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -341,7 +339,7 @@ public class ChoiceCard extends javax.swing.JPanel {
         noLabel.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         noLabel.setForeground(new java.awt.Color(0, 0, 0));
         noLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        noLabel.setText(bundle.getString("ChoiceCard.noLabel.text")); // NOI18N
+        noLabel.setText(bundle.getString("ChoiceCard1.noLabel.text")); // NOI18N
 
         javax.swing.GroupLayout goLeftPanelLayout = new javax.swing.GroupLayout(goLeftPanel);
         goLeftPanel.setLayout(goLeftPanelLayout);
@@ -360,7 +358,7 @@ public class ChoiceCard extends javax.swing.JPanel {
                 .addContainerGap(82, Short.MAX_VALUE))
         );
 
-        goRightPanel.setBackground(new java.awt.Color(194, 210, 233));
+        goRightPanel.setBackground(new java.awt.Color(255, 255, 51));
         goRightPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         goRightPanel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -368,26 +366,32 @@ public class ChoiceCard extends javax.swing.JPanel {
             }
         });
 
-        yesLabel.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        yesLabel.setForeground(new java.awt.Color(0, 0, 0));
-        yesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        yesLabel.setText(bundle.getString("ChoiceCard.yesLabel.text")); // NOI18N
+        jTextArea1.setBackground(new java.awt.Color(255, 255, 0));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(0, 0, 0));
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setText(bundle.getString("ChoiceCard1.jTextArea1.text")); // NOI18N
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setBorder(null);
+        jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout goRightPanelLayout = new javax.swing.GroupLayout(goRightPanel);
         goRightPanel.setLayout(goRightPanelLayout);
         goRightPanelLayout.setHorizontalGroup(
             goRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, goRightPanelLayout.createSequentialGroup()
+            .addGroup(goRightPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(yesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addContainerGap())
         );
         goRightPanelLayout.setVerticalGroup(
             goRightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, goRightPanelLayout.createSequentialGroup()
-                .addContainerGap(77, Short.MAX_VALUE)
-                .addComponent(yesLabel)
-                .addGap(76, 76, 76))
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
         );
 
         javax.swing.GroupLayout cardPanelLayout = new javax.swing.GroupLayout(cardPanel);
@@ -412,46 +416,23 @@ public class ChoiceCard extends javax.swing.JPanel {
             .addGroup(cardPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(situationPane, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(cardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cardPanelLayout.createSequentialGroup()
-                        .addComponent(characterIconLabel)
-                        .addGap(26, 26, 26))
-                    .addGroup(cardPanelLayout.createSequentialGroup()
-                        .addGroup(cardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(goLeftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(goRightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                    .addComponent(goLeftPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(characterIconLabel)
+                    .addComponent(goRightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(characterNameLabel)
-                .addContainerGap())
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         background.add(cardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 200, 440, 390));
 
-        datePanel.setBackground(new java.awt.Color(94, 131, 186));
-
         dateLabel.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         dateLabel.setForeground(new java.awt.Color(0, 0, 0));
         dateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dateLabel.setText(bundle.getString("ChoiceCard.dateLabel.text")); // NOI18N
-
-        javax.swing.GroupLayout datePanelLayout = new javax.swing.GroupLayout(datePanel);
-        datePanel.setLayout(datePanelLayout);
-        datePanelLayout.setHorizontalGroup(
-            datePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(datePanelLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(dateLabel)
-                .addContainerGap(93, Short.MAX_VALUE))
-        );
-        datePanelLayout.setVerticalGroup(
-            datePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, datePanelLayout.createSequentialGroup()
-                .addGap(0, 3, Short.MAX_VALUE)
-                .addComponent(dateLabel))
-        );
-
-        background.add(datePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 600, 550, 50));
+        dateLabel.setText(bundle.getString("ChoiceCard1.dateLabel.text")); // NOI18N
+        background.add(dateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 600, 540, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -491,7 +472,6 @@ public class ChoiceCard extends javax.swing.JPanel {
     private javax.swing.JLabel characterIconLabel;
     private javax.swing.JLabel characterNameLabel;
     private javax.swing.JLabel dateLabel;
-    private javax.swing.JPanel datePanel;
     private javax.swing.JProgressBar environmentBar;
     private javax.swing.JLabel environmentIcon;
     private javax.swing.JPanel goLeftPanel;
@@ -499,6 +479,8 @@ public class ChoiceCard extends javax.swing.JPanel {
     private javax.swing.JProgressBar happinessBar;
     private javax.swing.JLabel happinessIcon;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JProgressBar moneyBar;
     private javax.swing.JLabel moneyIcon;
     private javax.swing.JLabel noLabel;
@@ -509,6 +491,5 @@ public class ChoiceCard extends javax.swing.JPanel {
     private javax.swing.JProgressBar statusBar;
     private javax.swing.JLabel statusIcon;
     private javax.swing.JLabel username;
-    private javax.swing.JLabel yesLabel;
     // End of variables declaration//GEN-END:variables
 }

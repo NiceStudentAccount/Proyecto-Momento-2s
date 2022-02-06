@@ -9,6 +9,7 @@ import Logic.ElementsInstantiation;
 import Logic.MainClass;
 import java.awt.BorderLayout;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -18,7 +19,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author samyg
  */
 public class MainFrame extends javax.swing.JFrame {
-    private ChoiceCard choiceCardMenu;
+    private static ChoiceCard choiceCardMenu;
+    private static TutorialPanel gameTutorial;
 
     /**
      * Creates new form MainFrame
@@ -26,24 +28,27 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         
-        this.choiceCardMenu = new ChoiceCard();
+        this.choiceCardMenu = new ChoiceCard(MainClass.getCardList());
+        this.gameTutorial = new TutorialPanel();
         this.setLocationRelativeTo(null);
     }
     
-    public void setCard(DecisionCard card) {
+    public static void setCard(DecisionCard card) {
         choiceCardMenu.setChoice(card);
         choiceCardMenu.paintCard();
     }
     
-    
-    
-    public void setStats() {
+    public static void setStats() {
         choiceCardMenu.setStatusStat(ElementsInstantiation.getStatusStat());
         choiceCardMenu.setMoneyStat(ElementsInstantiation.getMoneyStat());
         choiceCardMenu.setHappinessStat(ElementsInstantiation.getHappinessStat());
         choiceCardMenu.setEnvironmentStat(ElementsInstantiation.getEnvironmentStat());
         
         choiceCardMenu.paintInitialStats();
+    }
+    
+    public static void initiateGameMenu(JPanel contentPanel) {
+        MainClass.repaintMenu(choiceCardMenu, contentPanel);
     }
 
     /**
@@ -62,6 +67,8 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -131,6 +138,34 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(39, 39, 39))
         );
 
+        jPanel3.setBackground(new java.awt.Color(102, 255, 102));
+        jPanel3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
+
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText(bundle.getString("MainFrame.jLabel5.text")); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(59, 59, 59)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(44, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(40, 40, 40))
+        );
+
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
@@ -144,23 +179,26 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jLabel1)))
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(170, 170, 170)
-                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(220, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
+                .addGap(104, 104, 104)
                 .addComponent(jLabel1)
-                .addGap(88, 88, 88)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel2)
-                .addGap(81, 81, 81)
+                .addGap(68, 68, 68)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(29, 29, 29)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGap(45, 45, 45))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,18 +216,19 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
-        MainClass.repaintMenu(choiceCardMenu, background);
-        DecisionCard thisCard = MainClass.getCardList().get(0);
-        setCard(thisCard);
-        setStats();
+        MainClass.repaintMenu(gameTutorial, background);
     }//GEN-LAST:event_jPanel1MouseClicked
 
     private void jPanel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jPanel2MouseClicked
 
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        initiateGameMenu(background);
+    }//GEN-LAST:event_jPanel3MouseClicked
+
     
-    public void runMainFrame() {
+    public static void runMainFrame() {
         /* Set the Metal look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -217,7 +256,11 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                MainFrame mainFrame = new MainFrame();
+//                new MainFrame().setVisible(true);
+                mainFrame.setVisible(true);
+                ImageIcon img = MainClass.staticImage("GameIcon.png");
+                mainFrame.setIconImage(img.getImage());
             }
         });
     }
@@ -228,7 +271,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

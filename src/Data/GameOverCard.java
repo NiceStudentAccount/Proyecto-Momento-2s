@@ -4,7 +4,7 @@
  */
 package Data;
 
-import GUI.GameOverScreen;
+import GUI.DeathCard;
 import javax.swing.Icon;
 
 /**
@@ -12,19 +12,19 @@ import javax.swing.Icon;
  * @author samyg
  */
 public class GameOverCard extends Card {
-    private GameOverScreen screen;
+    private DeathCard deathCard;
 
-    public GameOverCard(GameCharacter character, String situation, GameOverScreen screen, String gameOverDescription, Icon gameOverIcon) {
+    public GameOverCard(GameCharacter character, String situation, DeathCard screen, String gameOverDescription, Icon gameOverIcon) {
         super(character, situation);
-        this.screen = new GameOverScreen(gameOverDescription, gameOverIcon);
+        this.deathCard = new DeathCard(gameOverDescription, gameOverIcon);
     }
 
-    public GameOverScreen getScreen() {
-        return screen;
+    public DeathCard getDeathCard() {
+        return deathCard;
     }
 
-    public void setScreen(GameOverScreen screen) {
-        this.screen = screen;
+    public void setDeathCard(DeathCard deathCard) {
+        this.deathCard = deathCard;
     }
     
 }

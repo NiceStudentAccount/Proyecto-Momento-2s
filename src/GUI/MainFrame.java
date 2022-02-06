@@ -28,6 +28,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         
+        this.setTitle("Choice: El Juego");
         this.choiceCardMenu = new ChoiceCard(MainClass.getCardList());
         this.gameTutorial = new TutorialPanel();
         this.setLocationRelativeTo(null);
